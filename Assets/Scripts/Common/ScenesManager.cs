@@ -52,6 +52,11 @@ public class ScenesManager : MonoBehaviour
     {
         SceneLoader(SceneName.SelectScene);
     }
+
+    public void VoiceGameScene()
+    {
+        SceneLoader(SceneName.VoiceGame);
+    }
 }
 
 public enum SceneName
@@ -59,5 +64,6 @@ public enum SceneName
     None,
     Title,
     SelectScene,
+    VoiceGame,
 
 }

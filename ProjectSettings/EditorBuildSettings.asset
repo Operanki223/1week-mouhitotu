@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameSelectScene.unity
     guid: 7f07eb29eea93084c9e24f468e9ad119
+  - enabled: 1
+    path: Assets/Scenes/VoiceGameScene.unity
+    guid: b32bd65f3f48fa140964cc49628c7147
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
