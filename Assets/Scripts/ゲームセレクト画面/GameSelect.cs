@@ -38,5 +38,6 @@ public class GameSelect : MonoBehaviour
     public void VoiceGamePanel()
     {
         GamePanelSelect(SceneName.VoiceGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClips[3]);
     }
 }
