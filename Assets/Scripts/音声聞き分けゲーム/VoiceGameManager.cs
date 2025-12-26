@@ -43,6 +43,7 @@ public class VoiceGameManager : MonoBehaviour
 
     void Start()
     {
+        SoundManager.instance.BGMChange(SceneName.VoiceGame);
         Reset();
     }
 
@@ -91,7 +92,7 @@ public class VoiceGameManager : MonoBehaviour
             if (currentSec == 3 || currentSec == 2 || currentSec == 1)
             {
                 // 3,2,1 でSE再生
-                SoundManager.instance.PlaySE(SoundManager.instance._audioClips[5]);
+                SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
             }
             lastLimitTimeInt = currentSec;
         }
@@ -185,7 +186,7 @@ public class VoiceGameManager : MonoBehaviour
             TimerTextObj.SetActive(true);
             _hidePanel.SetActive(true);
             TimerText.text = count.ToString();
-            SoundManager.instance.PlaySE(SoundManager.instance._audioClips[5]);
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             count--;
         }
@@ -255,14 +256,14 @@ public class VoiceGameManager : MonoBehaviour
 
             TimerTextObj.SetActive(true);
             TimerText.text = "正解";
-            SoundManager.instance.PlaySE(SoundManager.instance._audioClips[0]);
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[0]);
 
             await TrueText();  // 2秒待つ（この間 PlayGame 停止）
         }
         else
         {
             Debug.Log("不正解");
-            SoundManager.instance.PlaySE(SoundManager.instance._audioClips[1]);
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[1]);
             heartLimit--;
             //heartText.text = $"LIFE:{heartLimit}";
 
