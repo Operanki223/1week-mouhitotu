@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] List<AudioSource> _audioSE = new List<AudioSource>();
     [SerializeField, Range(0.0f, 1.0f)] float volumeBGM = 0.5f;
     [SerializeField, Range(0.0f, 1.0f)] float volumeSE = 0.5f;
+    public List<AudioClip> _audioClips = new List<AudioClip>();
     public static SoundManager instance;
     void Awake()
     {
