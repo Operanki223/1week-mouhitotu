@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &75264813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1427,6 +1427,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3246246370517808937, guid: b4ca15de8fb700745b23688398991e10, type: 3}
+      propertyPath: _audioClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246246370517808937, guid: b4ca15de8fb700745b23688398991e10, type: 3}
+      propertyPath: '_audioClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4710bb9024b8a194b935835976c28caf, type: 3}
+    - target: {fileID: 3246246370517808937, guid: b4ca15de8fb700745b23688398991e10, type: 3}
+      propertyPath: '_audioClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e4f3f0d8dff15ea4e9858416025343ad, type: 3}
+    - target: {fileID: 3246246370517808937, guid: b4ca15de8fb700745b23688398991e10, type: 3}
+      propertyPath: '_audioClips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cf4a7a117a8fae498ee7f81a74e1c45, type: 3}
     - target: {fileID: 5483416083517672714, guid: b4ca15de8fb700745b23688398991e10, type: 3}
       propertyPath: m_Name
       value: SoundManager

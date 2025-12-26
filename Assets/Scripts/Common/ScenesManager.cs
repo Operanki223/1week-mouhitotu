@@ -45,11 +45,13 @@ public class ScenesManager : MonoBehaviour
     public void GameSelectSceneButton()
     {
         SceneLoader(SceneName.SelectScene);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClips[2]);
     }
 
     public void VoiceGameScene()
     {
         SceneLoader(SceneName.VoiceGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClips[5]);
     }
 }
 
