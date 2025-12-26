@@ -39,6 +39,7 @@ public class VoiceGameManager : MonoBehaviour
     // 結果表示中はPlayGameを止めるためのフラグ
     bool isResultTime = false;
     bool isReplaying = false;
+    int lastLimitTimeInt = -1;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class VoiceGameManager : MonoBehaviour
         _gameOverPanel.SetActive(false);
         _hidePanel.SetActive(false);
         scoreCount = 0;
+        lastLimitTimeInt = -1;
 
         for (int i = 0; i < _inputFieldsObj.Count; i++)
         {
@@ -83,6 +85,17 @@ public class VoiceGameManager : MonoBehaviour
         if (isResultTime) return;
 
         limitTime -= Time.deltaTime;
+        int currentSec = Mathf.CeilToInt(limitTime);
+        if (currentSec != lastLimitTimeInt)
+        {
+            if (currentSec == 3 || currentSec == 2 || currentSec == 1)
+            {
+                // 3,2,1 でSE再生
+                SoundManager.instance.PlaySE(SoundManager.instance._audioClips[5]);
+            }
+            lastLimitTimeInt = currentSec;
+        }
+
         if (limitTime > 0)
         {
             _hidePanel.SetActive(true);
@@ -172,6 +185,7 @@ public class VoiceGameManager : MonoBehaviour
             TimerTextObj.SetActive(true);
             _hidePanel.SetActive(true);
             TimerText.text = count.ToString();
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClips[5]);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
             count--;
         }
@@ -277,6 +291,7 @@ public class VoiceGameManager : MonoBehaviour
             deside = false;
             limitTime = 3;
             noloop = true;
+            lastLimitTimeInt = -1;
         }
 
         // 入力欄のリセット（任意）
