@@ -62,7 +62,7 @@ MonoBehaviour:
   - {fileID: 8233534001395044973}
   volumeBGM: 0.5
   volumeSE: 0.5
-  _audioClips:
+  _audioClipsSE:
   - {fileID: 8300000, guid: 450229549c900fa4b914c4122bcaf119, type: 3}
   - {fileID: 8300000, guid: d101a5d815711f64681717ef3dbebdb3, type: 3}
   - {fileID: 8300000, guid: 4710bb9024b8a194b935835976c28caf, type: 3}
@@ -70,6 +70,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0cf4a7a117a8fae498ee7f81a74e1c45, type: 3}
   - {fileID: 8300000, guid: e8a13ff1f1191854ea6121f0c72f4698, type: 3}
   - {fileID: 8300000, guid: 78bfb29cc44740943af0e287dbdaf265, type: 3}
+  _audioClipsBGM:
+  - {fileID: 8300000, guid: f3f846bb2fb3c6443bbaad2a3ad5e28e, type: 3}
+  sceneName: 0
 --- !u!82 &4039627497443682756
 AudioSource:
   m_ObjectHideFlags: 0
@@ -85,7 +88,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

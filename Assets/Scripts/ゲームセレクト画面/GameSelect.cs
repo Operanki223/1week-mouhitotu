@@ -17,6 +17,7 @@ public class GameSelect : MonoBehaviour
 
     void Start()
     {
+        SoundManager.instance.BGMChange(SceneName.SelectScene);
         //全パネルの非表示
         foreach (var p in _gamePanels)
         {
@@ -38,6 +39,12 @@ public class GameSelect : MonoBehaviour
     public void VoiceGamePanel()
     {
         GamePanelSelect(SceneName.VoiceGame);
-        SoundManager.instance.PlaySE(SoundManager.instance._audioClips[3]);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
+    }
+
+    public void HideTasteGamePanel()
+    {
+        GamePanelSelect(SceneName.HideTasteGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
     }
 }
