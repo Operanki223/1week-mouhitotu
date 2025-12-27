@@ -1,40 +1,105 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class SceneData
 {
-    [SerializeField] private SceneAsset _sceneObject;
+#if UNITY_EDITOR
+    // エディタ上でシーンをドラッグ＆ドロップする用
+    [SerializeField] private UnityEditor.SceneAsset _sceneObject;
+#endif
     [SerializeField] private SceneName _sceneName = SceneName.None;
 
-    public SceneAsset GetSceneAsset() => this._sceneObject;
-    public SceneName GetSceneName() => this._sceneName;
+    // 実際にロードに使うシーン名（Build Settings に登録されている名前）
+    [SerializeField] private string _scenePath;
+
+#if UNITY_EDITOR
+    public UnityEditor.SceneAsset GetSceneAsset() => _sceneObject;
+#endif
+
+    public SceneName GetSceneName() => _sceneName;
+    public string GetScenePath() => _scenePath;
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// エディタで SceneAsset を変更したときに呼び出して、
+    /// 自動的に _scenePath（シーン名）を更新する
+    /// </summary>
+    public void UpdateScenePathFromAsset()
+    {
+        if (_sceneObject == null)
+        {
+            _scenePath = string.Empty;
+            return;
+        }
+
+        // シーンファイル名をそのままシーン名として使う
+        // 例: "Assets/Scenes/Title.unity" → "Title"
+        var scenePath = UnityEditor.AssetDatabase.GetAssetPath(_sceneObject);
+        var sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+        _scenePath = sceneName;
+    }
+#endif
 }
 
 public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager instance;
+
     [SerializeField] private List<SceneData> _sceneDatas = new List<SceneData>();
+
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            // シーンをまたいで使いたければコメントアウト解除
+            // DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// インスペクタで値が変わったときに呼ばれる
+    /// SceneAsset から自動で _scenePath を更新する
+    /// </summary>
+    private void OnValidate()
+    {
+        if (_sceneDatas == null) return;
+
+        foreach (var data in _sceneDatas)
+        {
+            data?.UpdateScenePathFromAsset();
+        }
+    }
+#endif
 
     public void SceneLoader(SceneName sceneName)
     {
         foreach (var s in _sceneDatas)
         {
-            if (s.GetSceneName().Equals(sceneName))
+            if (s.GetSceneName() == sceneName)
             {
-                SceneManager.LoadScene(s.GetSceneAsset().name);
+                var scenePath = s.GetScenePath();
+
+                if (string.IsNullOrEmpty(scenePath))
+                {
+                    Debug.LogWarning($"SceneName {sceneName} のシーン名が設定されていません。");
+                    return;
+                }
+
+                SceneManager.LoadScene(scenePath);
+                return;
             }
         }
+
+        Debug.LogWarning($"SceneName {sceneName} がシーンリストに見つかりません。");
     }
 
     public void TitleButton()
@@ -68,5 +133,4 @@ public enum SceneName
     SelectScene,
     VoiceGame,
     HideTasteGame,
-
 }
