@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5109442553682366192}
   - component: {fileID: 4861264691504750159}
   m_Layer: 5
-  m_Name: FoodAnsButton
+  m_Name: AnsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

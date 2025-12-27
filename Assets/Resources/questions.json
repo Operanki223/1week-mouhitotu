@@ -1,0 +1,249 @@
+{
+  "questions": [
+    {
+      "resultImage": "カレー",
+      "correctWords": ["辛い", "茶色"]
+    },
+    {
+      "resultImage": "ケーキ",
+      "correctWords": ["甘い", "白い"]
+    },
+    {
+      "resultImage": "豚骨ラーメン",
+      "correctWords": ["こってり", "熱い"]
+    },
+    {
+      "resultImage": "サラダ",
+      "correctWords": ["ヘルシー", "カラフル"]
+    },
+    {
+      "resultImage": "枝豆",
+      "correctWords": ["しょっぱい", "夏に食べたい"]
+    },
+    {
+      "resultImage": "かき氷",
+      "correctWords": ["冷たい", "甘い"]
+    },
+    {
+      "resultImage": "おでん",
+      "correctWords": ["冬に食べたい", "あっさり"]
+    },
+    {
+      "resultImage": "焼肉",
+      "correctWords": ["においが強い", "高カロリー"]
+    },
+    {
+      "resultImage": "寿司",
+      "correctWords": ["高級", "和風"]
+    },
+    {
+      "resultImage": "フライドポテト",
+      "correctWords": ["安い", "子どもに人気"]
+    },
+    {
+      "resultImage": "納豆ごはん",
+      "correctWords": ["くさい", "ヘルシー"]
+    },
+    {
+      "resultImage": "レモン",
+      "correctWords": ["酸っぱい", "黄色"]
+    },
+    {
+      "resultImage": "チョコレート",
+      "correctWords": ["甘い", "茶色"]
+    },
+    {
+      "resultImage": "コーヒー",
+      "correctWords": ["苦い", "大人向け"]
+    },
+    {
+      "resultImage": "ビール",
+      "correctWords": ["苦い", "大人向け"]
+    },
+    {
+      "resultImage": "おにぎり",
+      "correctWords": ["和風", "日持ちする"]
+    },
+    {
+      "resultImage": "うな重",
+      "correctWords": ["高級", "夏に食べたい"]
+    },
+    {
+      "resultImage": "焼き芋",
+      "correctWords": ["甘い", "冬に食べたい"]
+    },
+    {
+      "resultImage": "ドーナツ",
+      "correctWords": ["甘い", "子どもに人気"]
+    },
+    {
+      "resultImage": "キムチ",
+      "correctWords": ["辛い", "赤色"]
+    },
+
+    {
+      "resultImage": "晴れ",
+      "correctWords": ["明るい", "青い"]
+    },
+    {
+      "resultImage": "雨",
+      "correctWords": ["暗い", "湿っている"]
+    },
+    {
+      "resultImage": "雪だるま",
+      "correctWords": ["白い", "静か"]
+    },
+    {
+      "resultImage": "雷",
+      "correctWords": ["怖い", "激しい"]
+    },
+    {
+      "resultImage": "虹",
+      "correctWords": ["カラフル", "美しい"]
+    },
+    {
+      "resultImage": "夜空",
+      "correctWords": ["夜", "静か"]
+    },
+    {
+      "resultImage": "霧",
+      "correctWords": ["白い", "見えにくい"]
+    },
+    {
+      "resultImage": "強風",
+      "correctWords": ["激しい", "冷たい"]
+    },
+
+    {
+      "resultImage": "犬",
+      "correctWords": ["かわいい", "元気"]
+    },
+    {
+      "resultImage": "猫",
+      "correctWords": ["かわいい", "静か"]
+    },
+    {
+      "resultImage": "牛",
+      "correctWords": ["大きい", "ゆっくり"]
+    },
+    {
+      "resultImage": "ライオン",
+      "correctWords": ["怖い", "強い"]
+    },
+    {
+      "resultImage": "ペンギン",
+      "correctWords": ["冷たい", "きれい"]
+    },
+    {
+      "resultImage": "パンダ",
+      "correctWords": ["かわいい", "白い"]
+    },
+    {
+      "resultImage": "うさぎ",
+      "correctWords": ["かわいい", "小さい"]
+    },
+    {
+      "resultImage": "カエル",
+      "correctWords": ["緑色", "湿っている"]
+    },
+
+    {
+      "resultImage": "うれしい顔",
+      "correctWords": ["楽しい", "明るい"]
+    },
+    {
+      "resultImage": "悲しい顔",
+      "correctWords": ["悲しい", "暗い"]
+    },
+    {
+      "resultImage": "怒っている顔",
+      "correctWords": ["怖い", "強い"]
+    },
+    {
+      "resultImage": "眠い顔",
+      "correctWords": ["眠い", "静か"]
+    },
+    {
+      "resultImage": "緊張している顔",
+      "correctWords": ["不安", "固い"]
+    },
+
+    {
+      "resultImage": "テレビ",
+      "correctWords": ["明るい", "大きい"]
+    },
+    {
+      "resultImage": "洗濯機",
+      "correctWords": ["白い", "家庭的"]
+    },
+    {
+      "resultImage": "カメラ",
+      "correctWords": ["黒い", "高級"]
+    },
+    {
+      "resultImage": "自転車",
+      "correctWords": ["速い", "外で使う"]
+    },
+    {
+      "resultImage": "時計",
+      "correctWords": ["小さい", "家庭的"]
+    },
+    {
+      "resultImage": "ぬいぐるみ",
+      "correctWords": ["かわいい", "柔らかい"]
+    },
+    {
+      "resultImage": "ろうそく",
+      "correctWords": ["明るい", "危ない"]
+    },
+    {
+      "resultImage": "ベッド",
+      "correctWords": ["眠い", "落ち着く"]
+    },
+    {
+      "resultImage": "ランドセル",
+      "correctWords": ["赤色", "子どもに人気"]
+    },
+
+    {
+      "resultImage": "森",
+      "correctWords": ["緑色", "静か"]
+    },
+    {
+      "resultImage": "海",
+      "correctWords": ["青い", "広い"]
+    },
+    {
+      "resultImage": "山",
+      "correctWords": ["大きい", "固い"]
+    },
+    {
+      "resultImage": "火山",
+      "correctWords": ["熱い", "危ない"]
+    },
+    {
+      "resultImage": "滝",
+      "correctWords": ["速い", "きれい"]
+    },
+    {
+      "resultImage": "湖",
+      "correctWords": ["冷たい", "静か"]
+    },
+    {
+      "resultImage": "草原",
+      "correctWords": ["緑色", "広い"]
+    },
+    {
+      "resultImage": "岩山",
+      "correctWords": ["固い", "大きい"]
+    },
+    {
+      "resultImage": "星空",
+      "correctWords": ["夜", "美しい"]
+    },
+    {
+      "resultImage": "朝日",
+      "correctWords": ["明るい", "赤色"]
+    }
+  ]
+}

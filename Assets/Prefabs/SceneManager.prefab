@@ -47,7 +47,13 @@ MonoBehaviour:
   _sceneDatas:
   - _sceneObject: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     _sceneName: 1
+    _scenePath: Title
   - _sceneObject: {fileID: 102900000, guid: 7f07eb29eea93084c9e24f468e9ad119, type: 3}
     _sceneName: 2
+    _scenePath: GameSelectScene
   - _sceneObject: {fileID: 102900000, guid: b32bd65f3f48fa140964cc49628c7147, type: 3}
     _sceneName: 3
+    _scenePath: VoiceGameScene
+  - _sceneObject: {fileID: 102900000, guid: 6c731497426761346b9607df908f88ff, type: 3}
+    _sceneName: 5
+    _scenePath: ImageWordGame
