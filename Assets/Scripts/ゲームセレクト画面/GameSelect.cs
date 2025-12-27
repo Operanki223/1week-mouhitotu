@@ -47,4 +47,10 @@ public class GameSelect : MonoBehaviour
         GamePanelSelect(SceneName.HideTasteGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
     }
+
+    public void ImageWordGamePanel()
+    {
+        GamePanelSelect(SceneName.ImageWordGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
+    }
 }

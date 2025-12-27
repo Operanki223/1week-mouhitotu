@@ -123,6 +123,10 @@ public class SoundManager : MonoBehaviour
                 StopBGM();
                 break;
 
+            case SceneName.ImageWordGame:
+                StopBGM();
+                break;
+
             default:
                 StopBGM();
                 break;

@@ -124,6 +124,12 @@ public class ScenesManager : MonoBehaviour
         SceneLoader(SceneName.HideTasteGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
     }
+
+    public void ImageWordGameScene()
+    {
+        SceneLoader(SceneName.ImageWordGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
+    }
 }
 
 public enum SceneName
@@ -133,4 +139,5 @@ public enum SceneName
     SelectScene,
     VoiceGame,
     HideTasteGame,
+    ImageWordGame,
 }
