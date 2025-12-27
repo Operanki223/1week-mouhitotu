@@ -733,7 +733,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204302859
 MonoBehaviour:
@@ -1216,7 +1216,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &367399278
 MonoBehaviour:
@@ -1794,7 +1794,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713319373
 MonoBehaviour:
@@ -3614,7 +3614,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1316716448
 MonoBehaviour:
@@ -4399,7 +4399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -214.99997, y: -150}
+  m_AnchoredPosition: {x: -215.00003, y: -150}
   m_SizeDelta: {x: -570, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505931742
@@ -4986,7 +4986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -214.99997, y: -150}
+  m_AnchoredPosition: {x: -215.00003, y: -150}
   m_SizeDelta: {x: -570, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636484566
@@ -5540,7 +5540,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795869734
 MonoBehaviour:
@@ -5720,7 +5720,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 260, y: 200}
+  m_CellSize: {x: 250, y: 190}
   m_Spacing: {x: 30, y: 30}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -5919,7 +5919,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 17}
-  m_SizeDelta: {x: 236, y: 134}
+  m_SizeDelta: {x: 230, y: 134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081904211
 MonoBehaviour:
@@ -6207,12 +6207,16 @@ MonoBehaviour:
   _sceneDatas:
   - _sceneObject: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     _sceneName: 1
+    _scenePath: Title
   - _sceneObject: {fileID: 102900000, guid: 7f07eb29eea93084c9e24f468e9ad119, type: 3}
     _sceneName: 2
+    _scenePath: GameSelectScene
   - _sceneObject: {fileID: 102900000, guid: b32bd65f3f48fa140964cc49628c7147, type: 3}
     _sceneName: 3
+    _scenePath: VoiceGameScene
   - _sceneObject: {fileID: 102900000, guid: a3d9e55f91ddb844daf04cf1ba71c8d5, type: 3}
     _sceneName: 4
+    _scenePath: HideTasteGame
 --- !u!4 &9003814919996861880
 Transform:
   m_ObjectHideFlags: 0

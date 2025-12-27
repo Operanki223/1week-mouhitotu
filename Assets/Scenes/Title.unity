@@ -742,7 +742,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 960, y: 540}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1154,10 +1154,16 @@ MonoBehaviour:
   _sceneDatas:
   - _sceneObject: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     _sceneName: 1
+    _scenePath: Title
   - _sceneObject: {fileID: 102900000, guid: 7f07eb29eea93084c9e24f468e9ad119, type: 3}
     _sceneName: 2
+    _scenePath: GameSelectScene
   - _sceneObject: {fileID: 102900000, guid: b32bd65f3f48fa140964cc49628c7147, type: 3}
     _sceneName: 3
+    _scenePath: VoiceGameScene
+  - _sceneObject: {fileID: 102900000, guid: a3d9e55f91ddb844daf04cf1ba71c8d5, type: 3}
+    _sceneName: 4
+    _scenePath: HideTasteGame
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
