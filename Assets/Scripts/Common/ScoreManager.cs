@@ -1,8 +1,9 @@
 using UnityEngine;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-using Unityroom.Api; // unityroom公式APIパッケージを入れている場合
+using unityroom.Api; // ← 先頭が小文字の unityroom
 #endif
+
 
 /// <summary>
 /// 6つのスコアをまとめて管理＆セーブするマネージャー
@@ -60,6 +61,15 @@ public class ScoreManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); // シーンをまたいでも残したい場合
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape) && Input.GetKeyUp(KeyCode.D))
+        {
+            ResetAllBestScores();
+            ScenesManager.instance.TitleButton();
+        }
     }
 
     // ===========================
@@ -217,12 +227,17 @@ public class ScoreManager : MonoBehaviour
         int score = _currentScores[slot];
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        UnityroomApiClient.Instance.SendScore(rankId, score);
-        Debug.Log($"[ScoreManager] unityroom ランキング(ID={rankId})にスロット{slot}のスコア {score} を送信しました。");
+    // unityroom 側のスコアボード設定に合わせてモードを選ぶ
+    // ・ハイスコア（降順）なら HighScoreDesc
+    // ・ハイスコア（昇順）なら HighScoreAsc
+    // ・毎回記録なら Always
+    UnityroomApiClient.Instance.SendScore(rankId, score, ScoreboardWriteMode.HighScoreDesc);
+    Debug.Log($"[ScoreManager] unityroom ランキング(ID={rankId})にスロット{slot}のスコア {score} を送信しました。");
 #else
         Debug.Log($"[ScoreManager] (エディタ) unityroomに送信する想定のスコア: {score} (slot={slot}, ID={rankId})");
 #endif
     }
+
 
     // ===========================
     // 合計ベストスコア関連
@@ -256,8 +271,8 @@ public class ScoreManager : MonoBehaviour
         int totalBest = GetTotalBestScore();
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        UnityroomApiClient.Instance.SendScore(totalBestRankingId, totalBest);
-        Debug.Log($"[ScoreManager] 合計ベストスコア {totalBest} を unityroom ランキング(ID={totalBestRankingId}) に送信しました。");
+    UnityroomApiClient.Instance.SendScore(totalBestRankingId, totalBest, ScoreboardWriteMode.HighScoreDesc);
+    Debug.Log($"[ScoreManager] 合計ベストスコア {totalBest} を unityroom ランキング(ID={totalBestRankingId}) に送信しました。");
 #else
         Debug.Log($"[ScoreManager] (エディタ) 合計ベストスコア {totalBest} を送信する想定 (ID={totalBestRankingId})");
 #endif

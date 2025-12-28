@@ -101,9 +101,16 @@ public class SoundManager : MonoBehaviour
     {
         if (_configPanel == null) return;
 
+        // ★ 配列数チェックを追加してから鳴らす
+        if (_audioClipsSE.Count > 3)
+        {
+            PlaySE(_audioClipsSE[3]);
+        }
+
         _configPanel.SetActive(false);
         Time.timeScale = 1f;
     }
+
 
     /// <summary>
     /// 設定パネルの開閉をトグルしてポーズを切り替える
@@ -114,14 +121,18 @@ public class SoundManager : MonoBehaviour
 
         bool willOpen = !_configPanel.activeSelf;
 
-        _configPanel.SetActive(willOpen);
-        Time.timeScale = willOpen ? 0f : 1f;
-
-        if (willOpen && _audioClipsSE.Count > 3)
+        if (willOpen)
         {
-            PlaySE(_audioClipsSE[3]);
+            // ★ 開くときは共通の OpenConfigPanel を使う
+            OpenConfigPanel();
+        }
+        else
+        {
+            // ★ 閉じるときは共通の CloseConfigPanel を使う
+            CloseConfigPanel();
         }
     }
+
 
     // =========================
     // 音量まわり

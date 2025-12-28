@@ -1544,6 +1544,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0cf4a7a117a8fae498ee7f81a74e1c45, type: 3}
   - {fileID: 8300000, guid: e8a13ff1f1191854ea6121f0c72f4698, type: 3}
   - {fileID: 8300000, guid: 78bfb29cc44740943af0e287dbdaf265, type: 3}
+  - {fileID: 8300000, guid: 0f7f13e553b999e40bc35a8123418410, type: 3}
   _audioClipsBGM:
   - {fileID: 8300000, guid: f3f846bb2fb3c6443bbaad2a3ad5e28e, type: 3}
   sceneName: 0
@@ -2100,10 +2101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 960, y: 540}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4309,6 +4310,10 @@ PrefabInstance:
     - target: {fileID: 3948653445836086108, guid: e420aa1403b1a6c4197a784a25e4455b, type: 3}
       propertyPath: m_Name
       value: ScoreManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6996352448390797951, guid: e420aa1403b1a6c4197a784a25e4455b, type: 3}
+      propertyPath: totalBestRankingId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

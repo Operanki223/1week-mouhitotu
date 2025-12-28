@@ -226,6 +226,7 @@ public class OverlapWordGameManager : MonoBehaviour
     void GameOver()
     {
         PlaySE(_seIndexGameOver);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[7]);
 
         int slot = 3; // このゲーム用のスロット番号
 
@@ -541,7 +542,7 @@ public class OverlapWordGameManager : MonoBehaviour
     void UpdateTimerUI()
     {
         if (_timerText == null) return;
-        _timerText.text = $"Time: {_remainTime:F1}";
+        _timerText.text = $"残り時間：{Mathf.CeilToInt(_remainTime)}秒";
     }
 
     void UpdateScoreUI()

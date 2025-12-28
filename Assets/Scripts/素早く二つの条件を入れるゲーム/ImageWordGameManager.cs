@@ -160,6 +160,7 @@ public class ImageWordGameManager : MonoBehaviour
         {
             _timeRemaining = 0f;
             _isGameOver = true;
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[7]);
 
             int slot = 2; // このゲーム用のスロット番号
 
@@ -187,7 +188,7 @@ public class ImageWordGameManager : MonoBehaviour
 
         if (_timerText != null)
         {
-            _timerText.text = $"TIME: {_timeRemaining:0.0}s";
+            _timerText.text = $"残り時間：{Mathf.CeilToInt(_timeRemaining)}秒";
         }
     }
 
@@ -382,7 +383,7 @@ public class ImageWordGameManager : MonoBehaviour
 
             if (pairCorrect)
             {
-                ShowJudge("正解！", new Color(1f, 1f, 0.3f)); // 黄色っぽい
+                ShowJudge("正解！", new Color(1f, 0.4f, 0.4f));
                 PlaySEByIndex(_correctSeIndex);
 
                 _score++;
@@ -393,7 +394,7 @@ public class ImageWordGameManager : MonoBehaviour
             }
             else
             {
-                ShowJudge("不正解", new Color(1f, 0.4f, 0.4f)); // 赤っぽい
+                ShowJudge("不正解", new Color(0.0f, 0.0f, 1.0f));
                 PlaySEByIndex(_wrongSeIndex);
 
                 // ★ 不正解の場合は、表示して少し待ってから式をクリア

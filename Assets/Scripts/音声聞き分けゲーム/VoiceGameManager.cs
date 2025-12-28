@@ -252,7 +252,7 @@ public class VoiceGameManager : MonoBehaviour
             isResultTime = true;
 
             TimerTextObj.SetActive(true);
-            TimerText.text = "正解";
+            TimerText.text = "<color=red>正解</color>";
             SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[0]);
 
             await TrueText();
@@ -267,6 +267,7 @@ public class VoiceGameManager : MonoBehaviour
         if (heartLimit < 1)
         {
             Debug.Log("ゲームオーバー");
+            SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[7]);
 
             isGameOver = true;
             isResultTime = true;

@@ -406,6 +406,7 @@ public class HideTasteUI : MonoBehaviour
         {
             // 問題はそのまま続行（別の選択肢は押せる）
             // もし「間違えたら即次の問題」にしたいならここで StartNewQuestion() を呼ぶ
+            StartNewQuestion();
         }
     }
 
@@ -470,6 +471,7 @@ public class HideTasteUI : MonoBehaviour
     {
         isQuestionActive = false;
         ClearHintsAndButtons();
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[7]);
 
         int slot = 1; // ←このゲームが使うスコアスロット番号
 
