@@ -46,6 +46,7 @@ public class HideTasteUI : MonoBehaviour
     [Header("ゲームオーバー表示")]
     [SerializeField] private GameObject gameOverPanel;          // GameOver用パネル
     [SerializeField] private TextMeshProUGUI gameOverScoreText; // 最終スコア表示用(任意)
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
 
     // 内部状態
     private int currentIndex = 0;
@@ -470,21 +471,33 @@ public class HideTasteUI : MonoBehaviour
         isQuestionActive = false;
         ClearHintsAndButtons();
 
+        int slot = 1; // ←このゲームが使うスコアスロット番号
+
+        // 今回のスコアをスロットにセット
+        ScoreManager.Instance.SetScore(slot, correctCount);
+
+        // 前回より大きい時だけ自動更新（内部で比較してくれる）
+        ScoreManager.Instance.SaveBestScore(slot);
+
+        int best = ScoreManager.Instance.GetBestScore(slot);
+
+        _bestScoreText.text = $"最高正解数：{best}";
+
+        // unityroomランキングを使うなら（任意）
+        ScoreManager.Instance.SendTotalBestScoreToUnityroom();
+
         if (timerText != null)
-        {
             timerText.text = "ゲーム終了";
-        }
 
         if (gameOverPanel != null)
-        {
             gameOverPanel.SetActive(true);
-        }
 
         if (gameOverScoreText != null)
         {
             gameOverScoreText.text = $"正解数：{correctCount}";
         }
     }
+
 
     /// <summary>
     /// GameOverパネルの「リトライ」ボタンから呼ぶ用
