@@ -6,6 +6,7 @@ public class TitleScene : MonoBehaviour
     void Start()
     {
         SoundManager.instance.BGMChange(SceneName.Title);
+        SoundManager.instance.sceneName = SceneName.Title;
     }
 
     // Update is called once per frame

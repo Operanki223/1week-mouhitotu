@@ -66,6 +66,7 @@ public class ImageWordGameManager : MonoBehaviour
     [Header("リザルト UI")]
     [SerializeField] private GameObject _resultPanel;
     [SerializeField] private TextMeshProUGUI _resultScoreText;
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
 
     [Header("その他ボタン")]
     [SerializeField] private Button _rerollButton;             // 全ての選択肢を更新するボタン
@@ -160,6 +161,20 @@ public class ImageWordGameManager : MonoBehaviour
             _timeRemaining = 0f;
             _isGameOver = true;
 
+            int slot = 2; // このゲーム用のスロット番号
+
+            // 今回のスコアをスロット2にセット
+            ScoreManager.Instance.SetScore(slot, _score);
+
+            // 前のスコアより大きければベスト更新
+            ScoreManager.Instance.SaveBestScore(slot);
+
+            int best = ScoreManager.Instance.GetBestScore(slot);
+
+            _bestScoreText.text = $"最高正解数：{best}";
+
+            // （Unityroomのランキング使うなら）
+            ScoreManager.Instance.SendTotalBestScoreToUnityroom();
             foreach (var btn in _choiceButtons)
             {
                 btn.interactable = false;
@@ -175,6 +190,7 @@ public class ImageWordGameManager : MonoBehaviour
             _timerText.text = $"TIME: {_timeRemaining:0.0}s";
         }
     }
+
 
 
     void UpdateScoreText()
