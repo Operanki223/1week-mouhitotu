@@ -24,6 +24,13 @@ public class VoiceGameManager : MonoBehaviour
     [SerializeField] GameObject _hidePanel;
     [SerializeField] List<TMP_InputField> _inputFields = new List<TMP_InputField>();
     [SerializeField] List<GameObject> _inputFieldsObj = new List<GameObject>();
+
+    [Header("UI: 最高正解数表示")]
+    [SerializeField] private TextMeshProUGUI bestScoreText;
+
+    [Header("ScoreManager のスロット番号")]
+    [SerializeField] private int scoreSlotIndex = 0; // ← VoiceGame 用のスロット番号(0)
+
     List<AudioClip> audioClips;
 
     int wordsLimit = 2;
@@ -45,6 +52,9 @@ public class VoiceGameManager : MonoBehaviour
     {
         SoundManager.instance.BGMChange(SceneName.VoiceGame);
         Reset();
+
+        // ゲーム開始時に「過去の最高正解数」を表示しておく
+        UpdateBestScoreUI();
     }
 
     void Update()
@@ -54,7 +64,6 @@ public class VoiceGameManager : MonoBehaviour
 
     void Reset()
     {
-        //heartText.text = $"LIFE:{heartLimit}";
         heartText.text = "";
         _gameOverPanel.SetActive(false);
         _hidePanel.SetActive(false);
@@ -64,13 +73,9 @@ public class VoiceGameManager : MonoBehaviour
         for (int i = 0; i < _inputFieldsObj.Count; i++)
         {
             if (i < 2)
-            {
                 _inputFieldsObj[i].SetActive(true);
-            }
             else
-            {
                 _inputFieldsObj[i].SetActive(false);
-            }
         }
     }
 
@@ -82,7 +87,6 @@ public class VoiceGameManager : MonoBehaviour
     void PlayGame()
     {
         if (isGameOver) return;
-        // 結果表示演出中はタイマー動かさない
         if (isResultTime) return;
 
         limitTime -= Time.deltaTime;
@@ -91,7 +95,6 @@ public class VoiceGameManager : MonoBehaviour
         {
             if (currentSec == 3 || currentSec == 2 || currentSec == 1)
             {
-                // 3,2,1 でSE再生
                 SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
             }
             lastLimitTimeInt = currentSec;
@@ -108,14 +111,13 @@ public class VoiceGameManager : MonoBehaviour
         if (limitTime < 1)
         {
             limitTime = 0;
-            // TimerText.text = "";
             TimerTextObj.SetActive(false);
             onDeside = true;
             _hidePanel.SetActive(false);
 
             if (noloop)
             {
-                noloop = false;  // 二重起動防止を先にしておく
+                noloop = false;  // 二重起動防止
 
                 audioClips = new List<AudioClip>();
                 List<string> audioNames = new List<string>();
@@ -128,9 +130,7 @@ public class VoiceGameManager : MonoBehaviour
                 {
                     int r = Random.Range(0, _voices.Count);
                     if (!_rnds.Contains(r))
-                    {
                         _rnds.Add(r);
-                    }
                 }
 
                 for (int i = 0; i < _voices.Count; i++)
@@ -156,30 +156,20 @@ public class VoiceGameManager : MonoBehaviour
 
     public void RePlay()
     {
-        // ゲームオーバー中は何もしない
         if (isGameOver) return;
-
-        // まだ一度も問題を流していない / リストが空なら何もしない
         if (audioClips == null || audioClips.Count == 0) return;
-
-        // 回答入力タイミングだけで押せるようにしたいなら
         if (!onDeside) return;
-
-        // 連打防止
         if (isReplaying) return;
 
-        // カウントダウン → 再生 を非同期で実行
         RePlayRoutine().Forget();
     }
 
     private async UniTaskVoid RePlayRoutine()
     {
         isReplaying = true;
-
-        // PlayGame を止めて、カウントダウン表示用モードへ
         isResultTime = true;
 
-        int count = 3; // ← 3秒カウントダウン（好きに変えてOK）
+        int count = 3;
 
         while (count > 0)
         {
@@ -191,35 +181,25 @@ public class VoiceGameManager : MonoBehaviour
             count--;
         }
 
-        // ここで音声を再生
         SoundManager.instance.SomePlaySE(audioClips);
 
-        // タイマー表示を現在値に合わせて更新
         TimerTextObj.SetActive(true);
         TimerText.text = limitTime.ToString("F0");
 
-        // カウントダウン＆リプレイ終了 → 再び PlayGame を動かす
         isResultTime = false;
         isReplaying = false;
-
         _hidePanel.SetActive(false);
     }
-
-
 
     // 入力を待ってから判定する非同期処理
     private async UniTaskVoid WaitInputAndCheck(List<string> strings)
     {
-        // 決定ボタンが押されるまで待つ
         await InputWait();
-
-        // ここに来るのは deside == true になった後
-        WordCheck(strings);
+        await WordCheck(strings);  // ← ここは await にしておくと安全
     }
 
     private async UniTask InputWait()
     {
-        // deside が true になるまで待機
         await UniTask.WaitUntil(() => deside);
     }
 
@@ -227,6 +207,24 @@ public class VoiceGameManager : MonoBehaviour
     {
         float _waitTime = 2f;
         await UniTask.Delay(TimeSpan.FromSeconds(_waitTime));
+    }
+
+    private void UpdateBestScoreUI()
+    {
+        if (bestScoreText == null)
+        {
+            Debug.LogWarning("[VoiceGame] bestScoreText が設定されていません");
+            return;
+        }
+        if (ScoreManager.Instance == null)
+        {
+            Debug.LogWarning("[VoiceGame] ScoreManager.Instance が null です");
+            return;
+        }
+
+        int best = ScoreManager.Instance.GetBestScore(scoreSlotIndex);
+        Debug.Log($"[VoiceGame] UpdateBestScoreUI slot={scoreSlotIndex}, best={best}");
+        bestScoreText.text = $"最高正解数：{best}回";
     }
 
     async Task WordCheck(List<string> strings)
@@ -251,27 +249,19 @@ public class VoiceGameManager : MonoBehaviour
             Debug.Log("正解");
             scoreCount++;
 
-            // 結果演出ON
             isResultTime = true;
 
             TimerTextObj.SetActive(true);
             TimerText.text = "正解";
             SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[0]);
 
-            await TrueText();  // 2秒待つ（この間 PlayGame 停止）
+            await TrueText();
         }
         else
         {
             Debug.Log("不正解");
             SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[1]);
             heartLimit--;
-            //heartText.text = $"LIFE:{heartLimit}";
-
-            // 不正解表示したいならここでも同じように
-            //isResultTime = true;
-            //TimerTextObj.SetActive(true);
-            //TimerText.text = "不正解";
-            //await TrueText();
         }
 
         if (heartLimit < 1)
@@ -283,25 +273,39 @@ public class VoiceGameManager : MonoBehaviour
 
             _gameOverPanel.SetActive(true);
             _scoreText.text = $"正解数 {scoreCount}回";
-            // ゲームオーバーなら止めてOK
+
+            int slot = scoreSlotIndex;
+
+            // 今回のスコアをスロットにセット
+            ScoreManager.Instance.SetScore(slot, scoreCount);
+
+            // ベスト更新
+            ScoreManager.Instance.SaveBestScore(slot);
+
+            // デバッグログで中身確認
+            int bestAfterSave = ScoreManager.Instance.GetBestScore(slot);
+            Debug.Log($"[VoiceGame] GameOver score={scoreCount}, bestAfterSave={bestAfterSave}");
+
+            // UI更新
+            UpdateBestScoreUI();
+
+            // Unityroom に合計ベストを送信
+            ScoreManager.Instance.SendTotalBestScoreToUnityroom();
             return;
         }
         else
         {
-            // 次の問題に行くならここでリセットとか
             deside = false;
             limitTime = 3;
             noloop = true;
             lastLimitTimeInt = -1;
         }
 
-        // 入力欄のリセット（任意）
         for (int i = 0; i < _inputFields.Count; i++)
         {
             _inputFields[i].text = "";
         }
 
-        // 演出終了 → 次のゲームが動き出せる
         isResultTime = false;
     }
 

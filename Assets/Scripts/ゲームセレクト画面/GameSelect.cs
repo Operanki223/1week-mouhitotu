@@ -17,6 +17,7 @@ public class GameSelect : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         SoundManager.instance.BGMChange(SceneName.SelectScene);
         //全パネルの非表示
         foreach (var p in _gamePanels)
@@ -51,6 +52,11 @@ public class GameSelect : MonoBehaviour
     public void ImageWordGamePanel()
     {
         GamePanelSelect(SceneName.ImageWordGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
+    }
+    public void OverlapWordGamePanel()
+    {
+        GamePanelSelect(SceneName.OverlapWordGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
     }
 }

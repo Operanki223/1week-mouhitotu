@@ -56,11 +56,11 @@ public class ScenesManager : MonoBehaviour
         {
             instance = this;
             // シーンをまたいで使いたければコメントアウト解除
-            // DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -105,30 +105,46 @@ public class ScenesManager : MonoBehaviour
     public void TitleButton()
     {
         SceneLoader(SceneName.Title);
+        SoundManager.instance.sceneName = SceneName.Title;
     }
 
     public void GameSelectSceneButton()
     {
         SceneLoader(SceneName.SelectScene);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[2]);
+        SoundManager.instance.sceneName = SceneName.SelectScene;
+        SoundManager.instance._configPanel.SetActive(false);
     }
 
     public void VoiceGameScene()
     {
         SceneLoader(SceneName.VoiceGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
+        SoundManager.instance.sceneName = SceneName.VoiceGame;
+        SoundManager.instance._configPanel.SetActive(false);
     }
 
     public void HideTasteGameScene()
     {
         SceneLoader(SceneName.HideTasteGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
+        SoundManager.instance.sceneName = SceneName.HideTasteGame;
+        SoundManager.instance._configPanel.SetActive(false);
     }
 
     public void ImageWordGameScene()
     {
         SceneLoader(SceneName.ImageWordGame);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
+        SoundManager.instance.sceneName = SceneName.ImageWordGame;
+        SoundManager.instance._configPanel.SetActive(false);
+    }
+    public void OverlapWordGameScene()
+    {
+        SceneLoader(SceneName.OverlapWordGame);
+        SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[5]);
+        SoundManager.instance.sceneName = SceneName.OverlapWordGame;
+        SoundManager.instance._configPanel.SetActive(false);
     }
 }
 
@@ -140,4 +156,5 @@ public enum SceneName
     VoiceGame,
     HideTasteGame,
     ImageWordGame,
+    OverlapWordGame,
 }

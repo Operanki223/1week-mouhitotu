@@ -6,6 +6,7 @@ public class Buttons : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         SoundManager.instance.PlaySE(SoundManager.instance._audioClipsSE[3]);
+        Time.timeScale = 1;
     }
 
     public void PanelOpen()

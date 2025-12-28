@@ -54,6 +54,12 @@ MonoBehaviour:
   - _sceneObject: {fileID: 102900000, guid: b32bd65f3f48fa140964cc49628c7147, type: 3}
     _sceneName: 3
     _scenePath: VoiceGameScene
+  - _sceneObject: {fileID: 102900000, guid: a3d9e55f91ddb844daf04cf1ba71c8d5, type: 3}
+    _sceneName: 4
+    _scenePath: HideTasteGame
   - _sceneObject: {fileID: 102900000, guid: 6c731497426761346b9607df908f88ff, type: 3}
     _sceneName: 5
     _scenePath: ImageWordGame
+  - _sceneObject: {fileID: 102900000, guid: 8c486fab8cfd09b4488d6f07062a4f51, type: 3}
+    _sceneName: 6
+    _scenePath: OverlapWordGame

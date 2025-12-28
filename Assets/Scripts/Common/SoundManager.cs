@@ -1,14 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] AudioSource _audioBGM;
-    [SerializeField] List<AudioSource> _audioSE = new List<AudioSource>();
-    [SerializeField, Range(0.0f, 1.0f)] float volumeBGM = 0.5f;
-    [SerializeField, Range(0.0f, 1.0f)] float volumeSE = 0.5f;
+    [Header("Config UI")]
+    [SerializeField] public GameObject _configPanel;
+
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource _audioBGM;
+    [SerializeField] private List<AudioSource> _audioSE = new List<AudioSource>();
+
+    [Header("Volumes")]
+    [SerializeField, Range(0.0f, 1.0f)] private float volumeBGM = 0.5f;
+    [SerializeField, Range(0.0f, 1.0f)] private float volumeSE = 0.5f;
+
+    [Header("Clips")]
     public List<AudioClip> _audioClipsSE = new List<AudioClip>();
     public List<AudioClip> _audioClipsBGM = new List<AudioClip>();
+
     public static SoundManager instance;
     public SceneName sceneName = SceneName.None;
 
@@ -32,6 +42,7 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        // BGM 初期設定
         if (_audioBGM != null)
         {
             _audioBGM.loop = true;          // BGMはループ
@@ -39,29 +50,124 @@ public class SoundManager : MonoBehaviour
         }
 
         // SE側のボリュームも初期値を反映
-        foreach (var se in _audioSE)
+        ApplySEVolumeToAll();
+
+        // 最初はパネル閉じてゲーム動作状態にしておく
+        if (_configPanel != null)
         {
-            if (se != null) se.volume = volumeSE;
+            _configPanel.SetActive(false);
         }
+        Time.timeScale = 1f;
     }
 
     void Update()
     {
-        // 必要なら Inspector からリアルタイム音量調整したい時だけ反映
+        // Qキーで設定パネルの開閉＋ポーズ切り替え（新Input System）
+        if (Keyboard.current != null && Keyboard.current.qKey.wasPressedThisFrame && !SoundManager.instance.sceneName.Equals(SceneName.Title))
+        {
+            ToggleConfigPanel();
+        }
+
+        // ※ 音量は SetBGMVolume / SetSEVolume からだけ変更する想定なので
+        //    ここでは volume を触らない
+    }
+
+    // =========================
+    // パネル & ポーズ制御
+    // =========================
+
+    /// <summary>
+    /// 設定パネルを開いてゲームを止める
+    /// </summary>
+    public void OpenConfigPanel()
+    {
+        if (_configPanel == null) return;
+
+        _configPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        // 開くときにSEを鳴らす（配列数チェック付き）
+        if (_audioClipsSE.Count > 3)
+        {
+            PlaySE(_audioClipsSE[3]);
+        }
+    }
+
+    /// <summary>
+    /// 設定パネルを閉じてゲームを再開する
+    /// （ボタンからも呼べるように public）
+    /// </summary>
+    public void CloseConfigPanel()
+    {
+        if (_configPanel == null) return;
+
+        _configPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    /// <summary>
+    /// 設定パネルの開閉をトグルしてポーズを切り替える
+    /// </summary>
+    public void ToggleConfigPanel()
+    {
+        if (_configPanel == null) return;
+
+        bool willOpen = !_configPanel.activeSelf;
+
+        _configPanel.SetActive(willOpen);
+        Time.timeScale = willOpen ? 0f : 1f;
+
+        if (willOpen && _audioClipsSE.Count > 3)
+        {
+            PlaySE(_audioClipsSE[3]);
+        }
+    }
+
+    // =========================
+    // 音量まわり
+    // =========================
+
+    /// <summary>
+    /// 全てのSE AudioSourceに volumeSE を適用
+    /// </summary>
+    private void ApplySEVolumeToAll()
+    {
+        foreach (var se in _audioSE)
+        {
+            if (se != null)
+            {
+                se.volume = volumeSE;
+            }
+        }
+    }
+
+    /// <summary>
+    /// スライダーからBGM音量を変更する用
+    /// Slider の OnValueChanged(float) から呼ぶ
+    /// </summary>
+    public void SetBGMVolume(float value)
+    {
+        volumeBGM = Mathf.Clamp01(value);
+
         if (_audioBGM != null)
         {
             _audioBGM.volume = volumeBGM;
         }
-
-        foreach (var se in _audioSE)
-        {
-            if (se != null) se.volume = volumeSE;
-        }
-
-        // ★ ここではもう BGMChange(sceneName) は呼ばない ★
-        //   シーンマネージャ側などから、シーン切り替えのタイミングで
-        //   明示的に BGMChange(...) を呼ぶようにする
     }
+
+    /// <summary>
+    /// スライダーからSE音量を変更する用
+    /// Slider の OnValueChanged(float) から呼ぶ
+    /// </summary>
+    public void SetSEVolume(float value)
+    {
+        volumeSE = Mathf.Clamp01(value);
+        ApplySEVolumeToAll();
+    }
+
+    // =========================
+    // BGM再生
+    // =========================
 
     /// <summary>
     /// 指定したBGMをループ再生する
@@ -127,27 +233,49 @@ public class SoundManager : MonoBehaviour
                 StopBGM();
                 break;
 
+            case SceneName.OverlapWordGame:
+                StopBGM();
+                break;
+
             default:
                 StopBGM();
                 break;
         }
     }
 
+    // =========================
+    // SE再生
+    // =========================
+
+    /// <summary>
+    /// 単発SE再生
+    /// </summary>
     public void PlaySE(AudioClip audioClip)
     {
         if (_audioSE.Count == 0 || _audioSE[0] == null || audioClip == null) return;
-        _audioSE[0].PlayOneShot(audioClip, volumeSE);
+
+        // スライダーの値を AudioSource に反映
+        _audioSE[0].volume = volumeSE;
+
+        // volumeScale は指定せず、AudioSource.volume を使う
+        _audioSE[0].PlayOneShot(audioClip);
     }
 
+    /// <summary>
+    /// 複数のSEを同時再生したい場合
+    /// </summary>
     public void SomePlaySE(List<AudioClip> audioClips)
     {
         int count = 1;
         foreach (var a in audioClips)
         {
             if (count >= _audioSE.Count) break;
-            if (_audioSE[count] != null && a != null)
+
+            var se = _audioSE[count];
+            if (se != null && a != null)
             {
-                _audioSE[count].PlayOneShot(a, volumeSE);
+                se.volume = volumeSE;
+                se.PlayOneShot(a);
             }
             count++;
         }
